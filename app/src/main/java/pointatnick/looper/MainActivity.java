@@ -19,11 +19,10 @@ public class MainActivity extends Activity {
   final Handler handler = new Handler();
 
   // runnable GifActivity
-  Runnable gifRunnable = new Runnable() {
+  Runnable startGif = new Runnable() {
     public void run() {
       Intent i = new Intent(MainActivity.this, GifActivity.class);
       startActivity(i);
-      finish();
     }
   };
 
@@ -41,7 +40,7 @@ public class MainActivity extends Activity {
     rl.setOnLongClickListener(new View.OnLongClickListener() {
       @Override
       public boolean onLongClick(View v) {
-        handler.post(gifRunnable);
+        handler.post(startGif);
         return true;
       }
     });

@@ -2,6 +2,7 @@ package pointatnick.looper;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -11,6 +12,14 @@ public class GifActivity extends Activity {
   // set timeout for GifActivity
   private static int TIMEOUT = 5000;
   private GifImageView giv;
+
+  // handler to finish GifActivity
+  Handler handler = new Handler();
+  Runnable finishGif = new Runnable() {
+    public void run() {
+      finish();
+    }
+  };
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +43,7 @@ public class GifActivity extends Activity {
                       | View.SYSTEM_UI_FLAG_FULLSCREEN
                       | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
+      handler.postDelayed(finishGif, TIMEOUT);
     }
   }
 }
