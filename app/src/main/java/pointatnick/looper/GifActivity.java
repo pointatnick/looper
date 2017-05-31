@@ -3,6 +3,7 @@ package pointatnick.looper;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.transition.Fade;
 import android.view.View;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -11,13 +12,14 @@ public class GifActivity extends Activity {
 
   // set timeout for GifActivity
   private static int TIMEOUT = 5000;
+
   private GifImageView giv;
 
   // handler to finish GifActivity
-  Handler handler = new Handler();
+  final Handler handler = new Handler();
   Runnable finishGif = new Runnable() {
     public void run() {
-      finish();
+      finishAfterTransition();
     }
   };
 
@@ -25,25 +27,34 @@ public class GifActivity extends Activity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_gif);
+    setupWindowAnimations();
+    setupGifImageView();
 
-    giv = (GifImageView) findViewById(R.id.gif_view);
+    // start timer
+    handler.postDelayed(finishGif, TIMEOUT);
   }
 
-  @Override
-  public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    if (hasFocus) {
+  /**********
+   * Functions to set up activity elements
+   **********/
 
-      // set gif to be fullscreen
-      giv.setSystemUiVisibility(
-              View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                      | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                      | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                      | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                      | View.SYSTEM_UI_FLAG_FULLSCREEN
-                      | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+  private void setupWindowAnimations() {
+    Fade fade = new Fade();
+    fade.setDuration(1000);
+    getWindow().setExitTransition(fade);
+  }
 
-      handler.postDelayed(finishGif, TIMEOUT);
-    }
+  private void setupGifImageView() {
+    // attach GifImageView from activity_gif
+    giv = (GifImageView) findViewById(R.id.gif_view);
+
+    // set GifImageView to be fullscreen
+    giv.setSystemUiVisibility(
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
   }
 }
