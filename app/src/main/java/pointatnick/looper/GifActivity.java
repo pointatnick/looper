@@ -16,8 +16,8 @@ public class GifActivity extends Activity {
     super.onWindowFocusChanged(hasFocus);
     if (hasFocus) {
       // create ImageView and set GIF as resource
-      ImageView i = (ImageView) findViewById(R.id.gif_view);
-      i.setImageResource(R.drawable.cat);
+      ImageView iv = (ImageView) findViewById(R.id.gif_view);
+      iv.setImageResource(R.drawable.cat);
     }
   }
 }
