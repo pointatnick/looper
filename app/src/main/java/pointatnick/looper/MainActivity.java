@@ -6,7 +6,6 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.transition.Fade;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.VideoView;
@@ -21,7 +20,8 @@ public class MainActivity extends Activity {
   Runnable startGif = new Runnable() {
     public void run() {
       Intent i = new Intent(MainActivity.this, GifActivity.class);
-      startActivity(i);//, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+      startActivity(i);
+      MainActivity.this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
   };
 
@@ -29,7 +29,6 @@ public class MainActivity extends Activity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    setupWindowAnimations();
     setupRelativeLayout();
     setupVideoView();
   }
@@ -48,13 +47,6 @@ public class MainActivity extends Activity {
   /**********
    * Functions to set up activity elements
    **********/
-  private void setupWindowAnimations() {
-    Fade fade = new Fade();
-    fade.setDuration(1000);
-    getWindow().setExitTransition(fade);
-    getWindow().setReturnTransition(fade);
-  }
-
   private void setupRelativeLayout() {
     // attach RelativeLayout from activity_main
     rl = (RelativeLayout) findViewById(R.id.rel_layout);
