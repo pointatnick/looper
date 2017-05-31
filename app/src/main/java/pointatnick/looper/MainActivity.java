@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
       // create VideoView
       VideoView vv = (VideoView) findViewById(R.id.video_view);
 
-      // set fullscreen
+      // set VideoView to be fullscreen
       vv.setSystemUiVisibility(
               View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                       | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION

@@ -2,9 +2,9 @@ package pointatnick.looper;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ImageView;
 
 public class GifActivity extends Activity {
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -15,9 +15,8 @@ public class GifActivity extends Activity {
   public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     if (hasFocus) {
-      // create ImageView and set GIF as resource
-      ImageView iv = (ImageView) findViewById(R.id.gif_view);
-      iv.setImageResource(R.drawable.cat);
+      // start timer for 5 seconds, then end activity
+
     }
   }
 }
