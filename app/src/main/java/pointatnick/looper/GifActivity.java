@@ -8,12 +8,16 @@ import pl.droidsonroids.gif.GifImageView;
 
 public class GifActivity extends Activity {
 
+  // set timeout for GifActivity
+  private static int TIMEOUT = 5000;
   private GifImageView giv;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_gif);
+
+    giv = (GifImageView) findViewById(R.id.gif_view);
   }
 
   @Override
@@ -29,8 +33,6 @@ public class GifActivity extends Activity {
                       | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                       | View.SYSTEM_UI_FLAG_FULLSCREEN
                       | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-
-      // start timer for 5 seconds, then end activity
 
     }
   }
